@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>
+body { margin: 0; background: #000; overflow: hidden; }
+#s { position: absolute; width: 80px; height: 10px; background: #00ff66; border-radius: 5px; }
+.bug { position: absolute; font-size: 20px; }
+</style></head><body><div id="s"></div>
+<script>
+const s = document.getElementById("s");
+window.addEventListener("touchmove", (e) => { s.style.left = e.touches[0].clientX - 40 + "px"; s.style.top = e.touches[0].clientY + "px"; });
+function spawn() {
+    let b = document.createElement("div"); b.className = "bug"; b.innerHTML = "👾";
+    b.style.left = Math.random() * window.innerWidth + "px"; b.style.top = "0px";
+    document.body.appendChild(b);
+    let ty = 0; let inv = setInterval(() => { 
+        ty += 5; b.style.top = ty + "px";
+        if(ty > window.innerHeight) { clearInterval(inv); b.remove(); }
+    }, 20);
+}
+setInterval(spawn, 1000);
+</script></body></html>
